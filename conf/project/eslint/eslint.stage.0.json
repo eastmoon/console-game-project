@@ -1,0 +1,46 @@
+{
+  "plugins": [
+    "babel"
+  ],
+  "rules": {
+    "no-compare-neg-zero": "error",
+    "no-cond-assign": "error",
+    "no-constant-condition": "error",
+    "no-control-regex": "error",
+    "no-dupe-args": "error",
+    "no-dupe-keys": "error",
+    "no-duplicate-case": "error",
+    "no-empty": "error",
+    "no-empty-character-class": "error",
+    "no-ex-assign": "error",
+    "no-extra-boolean-cast": "error",
+    "no-extra-parens": ["error",
+      "all",
+      {
+        "nestedBinaryExpressions": false
+      }
+    ],
+    "no-extra-semi": "error",
+    "no-func-assign": "error",
+    "no-inner-declarations": "error",
+    "no-invalid-regexp": "error",
+    "no-irregular-whitespace": "error",
+    "no-obj-calls": "error",
+    "no-regex-spaces": "error",
+    "no-sparse-arrays": "error",
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "error",
+    "no-unsafe-finally": "error",
+    "no-unsafe-negation": "error",
+    "use-isnan": "error",
+    "valid-typeof": "error",
+    "for-direction": "off",
+    "no-await-in-loop": "off",
+    "no-console": "off",
+    "no-debugger": "off",
+    "no-prototype-builtins": "off",
+    "no-template-curly-in-string": "off",
+    "valid-jsdoc": "off",
+    "no-undef": "error"
+  }
+}

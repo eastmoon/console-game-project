@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    "babel"
+  ],
+  "extends": [
+    "eslint:recommended"
+  ],
+  "rules": {
+    "init-declarations": "error",
+    "no-catch-shadow": "error",
+    "no-label-var": "error",
+    "no-restricted-globals": "error",
+    "no-shadow": "error",
+    "no-shadow-restricted-names": "error",
+    "no-undef-init": "error",
+    "no-undefined": "error",
+    "no-use-before-define": "error"
+  }
+}

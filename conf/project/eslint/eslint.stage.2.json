@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "node"
+  ],
+  "extends": [
+    "plugin:node/recommended"
+  ],
+  "rules": {
+    "node/no-unsupported-features": "off"
+  }
+}

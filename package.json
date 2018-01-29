@@ -1,0 +1,39 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "description": "demo code",
+  "scripts": {
+    "test": "echo test.",
+    "start": "babel-node src/app/main.js",
+    "dev": "babel-node conf/project/dev.conf.js"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "author": "jacky.chen",
+  "license": "MIT",
+  "devDependencies": {
+    "fuzzy": "^0.1.3",
+    "glob": "^7.1.2",
+    "inquirer": "^5.0.0",
+    "inquirer-autocomplete-prompt": "^0.12.1"
+  },
+  "dependencies": {
+    "app-module-path": "^2.2.0",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^8.2.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.16.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-node": "^5.2.1",
+    "merge": "^1.2.0",
+    "nodemon": "^1.14.11",
+    "yargs": "^11.0.0"
+  }
+}

@@ -56,9 +56,11 @@ export default class Controllers {
     execute($name, $param) {
         if (this.has($name)) {
             const cmd = this.container[$name];
+            const isAsync = Object.getOwnPropertyNames(cmd).includes("isAsync") ? cmd.isAsync : false;
             if (typeof cmd.execute !== "undefined") {
-                cmd.execute($param);
+                return isAsync ? cmd.asyncExecute($param) : cmd.execute($param);
             }
         }
+        return null;
     }
 }

@@ -5,7 +5,7 @@ const chalk = require("chalk");
 nodemon({
     restartable: "rs",
     verbose: true,
-    exec: "eslint src/app/main.js",
+    exec: "eslint src/**/*.js",
     watch: ["src"],
     ext: "js json",
     env: {

@@ -1,16 +1,16 @@
 // project framework
-import Pipe from "lib/mvc/progress/pipe";
+import Pipe from "lib/gra/command/pipe";
 
 // Library
+import clear from "clear";
 import inquirer from "inquirer";
-import chalk from "chalk";
 import glob from "glob";
 
 // utils
 import {infoToString} from "app/utils/format";
 
-// Application framework
-const pluginList = {};
+// views
+import ViewComponent from "app/views/component";
 
 // Startup pipe
 export default class Startup extends Pipe {
@@ -28,7 +28,8 @@ export default class Startup extends Pipe {
                     matches.forEach((item) => {
                         const module = require(`plugin/${item.split("plugin/")[1]}`);
                         const obj = new module.default();
-                        pluginList[obj.name] = obj;
+                        console.log(obj.name);
+                        this.application.controllers.register(obj.name, obj);
                     });
                     $resolve();
                 } else {
@@ -39,35 +40,12 @@ export default class Startup extends Pipe {
             console.log("[STARTUP] S2, Plugin initial.", ...infoToString($progress, $resolve, $reject));
         }, "S2");
         this.onComplete = ($progress = null) => {
-            console.log("[STARTUP] Complete, GOTO Main menu.", ...infoToString($progress));
-            // Defined question.
-            const inputfilename = {
-                type: "autocomplete",
-                name: "command",
-                message: chalk.blue.bold("Command :"),
-                source: () => {
-                    return new Promise((resolve) => {
-                        resolve(Object.keys(pluginList));
-                    });
-                }
-            };
-            // Execute question
-            inquirer
-                .prompt([inputfilename])
-                .then((answers) => {
-                    console.log(JSON.stringify(answers, null, '  '));
-                    // execute next command
-                    const obj = pluginList[answers.command];
-                    if (obj !== null && typeof obj.execute === "function") {
-                        obj.execute();
-                    }
-                });
-            //
+            console.log("[STARTUP] Complete, Game start.", ...infoToString($progress));
+            // clear view
+            clear();
+            // start view component
+            let com = new ViewComponent();
+            com.execute();
         }
-    }
-    //
-    execute($progress = null) {
-        console.log("[STARTUP] execute.");
-        return super.execute($progress);
     }
 }

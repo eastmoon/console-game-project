@@ -5,7 +5,7 @@ export default class ContanierFacade extends BasicObject {
 
     // Method
     register($name, $object) {
-        return ($object instanceof BasicObject)
+        return $object instanceof BasicObject;
     }
 
     remove($name) {

@@ -4,10 +4,10 @@
 
     author: jacky.chen
 */
-import Singleton from "utils/patterns/singleton";
-import Views from "./views";
-import Controllers from "./controllers";
-import Models from "./models";
+import Singleton from "lib/mvc/singleton";
+import Views from "./facade/views";
+import Controllers from "./facade/controllers";
+import Models from "./facade/models";
 
 // Singleton class
 export default class Application extends Singleton {
@@ -17,22 +17,20 @@ export default class Application extends Singleton {
     }
 
     install() {
-        console.log("MVC initial");
         // If re-new class, constructor will duplicate call.
         // This issue have two solution.
         // 1. never use new class to retrieve instance
         // 2. re-new class, and when first time call canstructor, will use install function.
         // declared member variable
         this.views = {
-            layers: new Views(),
-            modules: new Views()
+            component: new Views(),
+            module: new Views()
         };
         this.controllers = new Controllers();
         this.models = {
-            services: new Models(),
+            service: new Models(),
             proxy: new Models(),
             data: new Models()
-
         }
     }
 

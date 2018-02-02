@@ -13,7 +13,7 @@ module.exports = (config) => {
 
     // Sync execute OS command, or Node.js script which defined in package.json.
     // Execute nodemon and watch project folder, and to development modal with eslint.
-    const cmd = execSync("babel-node conf/nodemon/default.conf.js", {
+    const cmd = execSync("babel-node conf/project/nodemon/default.conf.js", {
         cwd: process.cwd(),
         stdio: [process.stdin, process.stdout, process.stderr]
     });

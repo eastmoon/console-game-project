@@ -26,7 +26,11 @@ export default class Application extends Singleton {
             component: new Views(),
             module: new Views()
         };
-        this.controllers = new Controllers();
+        this.controllers = {
+            command: new Controllers(),
+            update: new Controllers(),
+            ui: new Controllers()
+        }
         this.models = {
             service: new Models(),
             proxy: new Models(),

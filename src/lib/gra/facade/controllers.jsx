@@ -43,6 +43,15 @@ export default class Controllers {
         return null;
     }
 
+    // Model retrieve,
+    retrieve($name) {
+        // using mapping to check, if exist return object, then return null
+        if (this.has($name)) {
+            return this.container[$name];
+        }
+        return null;
+    }
+
     // Command check,
     has($name) {
         // retireve object, if null then dosn't exist.

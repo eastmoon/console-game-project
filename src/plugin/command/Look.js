@@ -1,14 +1,14 @@
 import Filter from "lib/mvc/progress/filter";
 
-export default class Exit extends Filter {
+export default class Look extends Filter {
     // Constructor
     constructor() {
-        super("exit")
+        super("look")
     }
     // Execute method
     execute($progress, $resolve) {
-        console.log("Execute Command 1");
-        $progress.next = null;
+        console.log(`[${$progress.data.description.short}]`);
+        console.log($progress.data.description.long);
         $resolve($progress);
     }
 }

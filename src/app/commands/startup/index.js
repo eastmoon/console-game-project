@@ -23,22 +23,65 @@ export default class Startup extends Pipe {
             $resolve();
         }, "S1");
         this.register(($progress = null, $resolve = null, $reject = null) => {
-            glob("**/*/plugin/**/*.js", {}, (err, matches) => {
+          console.log("[STARTUP] S2, Command plugin loading.", ...infoToString($progress, $resolve, $reject));
+            // Loading command PLUGIN
+            const path = "plugin/command";
+            glob(`**/*/${path}**/*.js`, {}, (err, matches) => {
                 if (!err) {
-                    matches.forEach((item) => {
-                        const module = require(`plugin/${item.split("plugin/")[1]}`);
-                        const obj = new module.default();
-                        console.log(obj.name);
-                        this.application.controllers.register(obj.name, obj);
+                    matches.forEach((pluginPath) => {
+                        let paths = pluginPath.split("src/");
+                        if (paths.length >= 2) {
+                            const module = require(paths[1]);
+                            const obj = new module.default();
+                            this.application.controllers.command.register(obj.name, obj);
+                        }
                     });
-                    $resolve();
                 } else {
-                    console.log("[PLUGIN] Not plugin.");
-                    $reject();
+                    console.log("[PLUGIN] Plugin loading fail.");
                 }
+                $resolve();
             });
-            console.log("[STARTUP] S2, Plugin initial.", ...infoToString($progress, $resolve, $reject));
         }, "S2");
+        this.register(($progress = null, $resolve = null, $reject = null) => {
+          console.log("[STARTUP] S3, Update plugin loading.", ...infoToString($progress, $resolve, $reject));
+            // Loading command PLUGIN
+            const path = "plugin/update";
+            glob(`**/*/${path}**/*.js`, {}, (err, matches) => {
+                if (!err) {
+                    matches.forEach((pluginPath) => {
+                        let paths = pluginPath.split("src/");
+                        if (paths.length >= 2) {
+                            const module = require(paths[1]);
+                            const obj = new module.default();
+                            this.application.controllers.update.register(obj.name, obj);
+                        }
+                    });
+                } else {
+                    console.log("[PLUGIN] Plugin loading fail.");
+                }
+                $resolve();
+            });
+        }, "S3");
+        this.register(($progress = null, $resolve = null, $reject = null) => {
+          console.log("[STARTUP] S4, View plugin loading.", ...infoToString($progress, $resolve, $reject));
+            // Loading command PLUGIN
+            const path = "plugin/ui";
+            glob(`**/*/${path}**/*.js`, {}, (err, matches) => {
+                if (!err) {
+                    matches.forEach((pluginPath) => {
+                        let paths = pluginPath.split("src/");
+                        if (paths.length >= 2) {
+                            const module = require(paths[1]);
+                            const obj = new module.default();
+                            this.application.controllers.ui.register(obj.name, obj);
+                        }
+                    });
+                } else {
+                    console.log("[PLUGIN] Plugin loading fail.");
+                }
+                $resolve();
+            });
+        }, "S4");
         this.onComplete = ($progress = null) => {
             console.log("[STARTUP] Complete, Game start.", ...infoToString($progress));
             // clear view

@@ -17,9 +17,12 @@ export default class Input extends Filter {
             type: "autocomplete",
             name: "command",
             message: chalk.blue.bold("Command :"),
-            source: () => {
+            source: (answer, input) => {
                 return new Promise((resolve) => {
-                    resolve(["look", "exit"]);
+                    let command = $progress.data.command.filter((name) => {
+                        return input ? name.includes(input) : true;
+                    });
+                    resolve(command);
                 });
             }
         };

@@ -22,8 +22,8 @@ export default class ViewComponent extends BasicObject {
             data: {
                 command: ["look", "exit"],
                 description: {
-                    short: "short description",
-                    long: "long description"
+                    short: "舞台",
+                    long: "這是一個虛擬空間"
                 }
             }
         };

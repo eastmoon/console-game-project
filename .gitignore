@@ -6,6 +6,8 @@ node_modules/
 
 # install library lock file
 npm-debug.*
+package-lock.json
+yarn-error.log
 
 # User-specific configurations
 .idea/

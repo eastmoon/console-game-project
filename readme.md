@@ -57,6 +57,16 @@ npm start
 yarn start
 ```
 
+##### CLI Option
++ --error=<true/false>
+> 是否顯示錯誤資訊 (console.error)，預設為 false；輸入 --error ，視為 true
+
++ --warn=<true/false>
+> 是否顯示警告資訊 (console.warn)，預設為 false；輸入 --warn ，視為 true
+
++ --dev=<true/false>
+> 是否顯示開發資訊 (console.debug)，預設為 false；輸入 --dev ，視為 true
+
 ### 開發環境
 ```
 // 使用 npm 套件

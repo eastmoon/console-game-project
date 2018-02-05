@@ -3,7 +3,7 @@
 // "variable=x" will not processing, and push into argv._ = ["variable=x"]
 import {argv} from "yargs";
 Object.keys(argv).forEach((key) => {
-    console.log(`${key} : ${argv[key]}`);
+    console.debug(`${key} : ${argv[key]}`);
 });
 
 // Bug fix for yarn doesn't give using npm_config_run_args.
@@ -11,12 +11,12 @@ Object.keys(argv).forEach((key) => {
 // Method 1, using yargs package.
 Object.keys(argv).forEach((key) => {
     if (key !== "_") {
-        console.log(`npm_config_${key} = ${argv[key]}`);
+        console.debug(`npm_config_${key} = ${argv[key]}`);
     } else {
         argv._.forEach((item) => {
             if (item.includes("=")) {
                 var obj = item.split("=");
-                console.log(`npm_config_${obj[0]} = ${obj[1]}`);
+                console.debug(`npm_config_${obj[0]} = ${obj[1]}`);
             }
         });
     }

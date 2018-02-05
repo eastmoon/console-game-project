@@ -7,3 +7,27 @@ import path from "path";
 addPath(path.join(process.cwd(), "src"));
 // Delete paths cache.
 delete require.cache[__filename];
+
+// Add console information output function.
+// error, warn, debug.
+// ref : https://www.npmjs.com/package/chalk
+import Chalk from "chalk";
+import {argv} from "yargs";
+console.error = (str) => {
+    if (argv.error) {
+        console.log(`${Chalk.black.bgRed("[ERROR]")} ${Chalk.redBright(str)}`);
+    }
+}
+console.warn = (str) => {
+    if (argv.warn) {
+        console.log(`${Chalk.black.bgYellow("[WARN]")} ${Chalk.yellowBright(str)}`);
+    }
+}
+console.debug = (str) => {
+    if (argv.dev) {
+        console.log(`${Chalk.black.bgCyan("[DEBUG]")} ${Chalk.cyanBright(str)}`);
+    }
+}
+console.error("Error information will showing.");
+console.warn("Warn information will showing.");
+console.debug("Debug information will showing.");

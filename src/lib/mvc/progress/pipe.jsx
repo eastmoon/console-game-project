@@ -21,10 +21,10 @@ export default class Pipe extends MacroCommand {
         return this;
     }
     register($filter, $name = "") {
-        // console.log("Filter Object : ", typeof $filter === "object" && typeof $filter.execute === "function");
-        // console.log("Filter Class : ", typeof $filter === "function" && typeof $filter.prototype === "object" && typeof $filter.prototype.execute === "function");
-        // console.log("Function : ", typeof $filter === "function" && typeof $filter.prototype === "object" && typeof $filter.prototype.execute === "undefined");
-        // console.log("Function 2 : ", typeof $filter === "function", " : ", typeof $filter.prototype === "undefined");
+        // console.debug("Filter Object : ", typeof $filter === "object" && typeof $filter.execute === "function");
+        // console.debug("Filter Class : ", typeof $filter === "function" && typeof $filter.prototype === "object" && typeof $filter.prototype.execute === "function");
+        // console.debug("Function : ", typeof $filter === "function" && typeof $filter.prototype === "object" && typeof $filter.prototype.execute === "undefined");
+        // console.debug("Function 2 : ", typeof $filter === "function", " : ", typeof $filter.prototype === "undefined");
         // detected input filter is object / class / function
         let filter = $filter;
         if (typeof $filter === "function") {

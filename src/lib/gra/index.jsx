@@ -34,7 +34,10 @@ export default class Application extends Singleton {
         this.models = {
             service: new Models(),
             proxy: new Models(),
-            data: new Models()
+            data: {
+                map: new Models(),
+                npc: new Models()
+            }
         }
     }
 

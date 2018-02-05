@@ -15,7 +15,7 @@ export default class ViewComponent extends BasicObject {
         super($name);
         this.info = {
             status: {
-                update: "",
+                update: "asia/taiwan",
                 command: "look",
                 view: "input"
             },
@@ -38,8 +38,8 @@ export default class ViewComponent extends BasicObject {
         4. when console-ui run over, setting next command information, and re-execute view.component.
         */
         let pipe = new Pipe();
-        pipe.register(this.command.bind(this), "S1");
-        pipe.register(this.update.bind(this), "S2");
+        pipe.register(this.update.bind(this), "S1");
+        pipe.register(this.command.bind(this), "S2");
         pipe.register(this.render.bind(this), "S3");
         pipe.onComplete = this.renderComplete.bind(this);
         pipe.execute(this.info);
@@ -47,6 +47,7 @@ export default class ViewComponent extends BasicObject {
     // Update
     update($progress = null, $resolve = null) {
         // Execute update plugin.
+        /*
         if (this.application.controllers.update.has($progress.status.update)) {
             this.application.controllers.update.execute($progress.status.update, $progress)
                 .then((info) => {
@@ -56,6 +57,9 @@ export default class ViewComponent extends BasicObject {
         } else {
           $resolve($progress);
         }
+        */
+        $progress.data = this.application.models.data.map.retrieve($progress.status.update).value();
+        $resolve($progress);
     }
     // Command
     command($progress = null, $resolve = null) {

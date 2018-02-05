@@ -1,0 +1,7 @@
+{
+    "command": ["look", "exit"],
+    "description": {
+        "short": "台灣",
+        "long": "這是一個名為台灣的虛擬空間，四面環海的島嶼座落於太平海的西側"
+    }
+}

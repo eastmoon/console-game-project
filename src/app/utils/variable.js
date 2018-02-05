@@ -9,6 +9,7 @@ Object.keys(argv).forEach((key) => {
 // Bug fix for yarn doesn't give using npm_config_run_args.
 // translate "variable=x" to npm_conifg_vairable=x.
 // Method 1, using yargs package.
+/*
 Object.keys(argv).forEach((key) => {
     if (key !== "_") {
         console.debug(`npm_config_${key} = ${argv[key]}`);
@@ -21,3 +22,4 @@ Object.keys(argv).forEach((key) => {
         });
     }
 });
+*/

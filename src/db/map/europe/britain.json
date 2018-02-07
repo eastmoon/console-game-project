@@ -1,5 +1,5 @@
 {
-    "command": ["look", "exit"],
+    "command": ["look", "exit", "goto"],
     "description": {
         "short": "英國",
         "long": "這是一個名為英國的虛擬空間，有著亞瑟王傳說的島國，與歐洲大陸隔海相望。"

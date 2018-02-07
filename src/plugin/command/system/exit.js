@@ -1,4 +1,4 @@
-import Filter from "lib/mvc/progress/filter";
+import Filter from "lib/gra/command/filter";
 
 export default class Exit extends Filter {
     // Constructor
@@ -13,5 +13,9 @@ export default class Exit extends Filter {
         $progress.status.command = "";
         $progress.status.view = "";
         $resolve($progress);
+    }
+    // Accessor
+    get help() {
+        return "離開遊戲"
     }
 }

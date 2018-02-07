@@ -1,4 +1,4 @@
-import Filter from "lib/mvc/progress/filter";
+import Filter from "lib/gra/command/filter";
 
 export default class Look extends Filter {
     // Constructor
@@ -10,5 +10,9 @@ export default class Look extends Filter {
         console.log(`[${$progress.data.description.short}]`);
         console.log($progress.data.description.long);
         $resolve($progress);
+    }
+    // Accessor
+    get help() {
+        return "觀看，若要觀看特定目標，請使用 look <目標>"
     }
 }

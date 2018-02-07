@@ -15,8 +15,10 @@ export default class ViewComponent extends BasicObject {
         super($name);
         this.info = {
             status: {
-                update: "asia/taiwan",
-                command: "look",
+                command: {
+                    cmd: "goto",
+                    param: ["asia/taiwan"]
+                },
                 view: "input"
             },
             data: {
@@ -33,38 +35,19 @@ export default class ViewComponent extends BasicObject {
         /*
         Execute flow
         1. execute command plugin
-        2. update data information
-        3. when command complete, execute consolne-ui plugin
-        4. when console-ui run over, setting next command information, and re-execute view.component.
+        2. when command complete, execute consolne-ui plugin
+        3. when console-ui run over, setting next command information, and re-execute view.component.
         */
         let pipe = new Pipe();
-        pipe.register(this.update.bind(this), "S1");
         pipe.register(this.command.bind(this), "S2");
         pipe.register(this.render.bind(this), "S3");
         pipe.onComplete = this.renderComplete.bind(this);
         pipe.execute(this.info);
     }
-    // Update
-    update($progress = null, $resolve = null) {
-        // Execute update plugin.
-        /*
-        if (this.application.controllers.update.has($progress.status.update)) {
-            this.application.controllers.update.execute($progress.status.update, $progress)
-                .then((info) => {
-                    $progress = info;
-                    $resolve($progress);
-                });
-        } else {
-          $resolve($progress);
-        }
-        */
-        $progress.data = this.application.models.data.map.retrieve($progress.status.update).value();
-        $resolve($progress);
-    }
     // Command
     command($progress = null, $resolve = null) {
-        if (this.application.controllers.command.has($progress.status.command)) {
-            this.application.controllers.command.execute($progress.status.command, $progress)
+        if (this.application.controllers.command.has($progress.status.command.cmd)) {
+            this.application.controllers.command.execute($progress.status.command.cmd, $progress)
                 .then((info) => {
                     $progress = info;
                     $resolve($progress);

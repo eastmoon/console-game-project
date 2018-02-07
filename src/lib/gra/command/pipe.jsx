@@ -9,4 +9,7 @@ export default class GRAPipe extends Pipe {
     get application() {
         return Application.instance;
     }
+    get help() {
+        return "";
+    }
 }

@@ -9,7 +9,4 @@ export default class GRAFilter extends Filter {
     get application() {
         return Application.instance;
     }
-    get help() {
-        return "";
-    }
 }

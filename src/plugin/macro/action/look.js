@@ -1,9 +1,10 @@
-import Filter from "lib/gra/command/filter";
+//
+import Action from "lib/gra/controller/plugin/action";
 
-export default class Look extends Filter {
+export default class Look extends Action {
     // Constructor
     constructor() {
-        super("look")
+        super("look");
     }
     // Execute method
     execute($progress, $resolve) {
@@ -14,5 +15,8 @@ export default class Look extends Filter {
     // Accessor
     get help() {
         return "觀看，若要觀看特定目標，請使用 look <目標>"
+    }
+    get link() {
+        return "description";
     }
 }

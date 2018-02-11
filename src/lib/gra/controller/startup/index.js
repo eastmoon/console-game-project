@@ -1,23 +1,27 @@
 // project framework
-import Pipe from "lib/gra/command/pipe";
+import GRAPipe from "lib/gra/controller/common/pipe";
 
 // Library
 import clear from "clear";
 import inquirer from "inquirer";
 
 // utils
-import {infoToString} from "app/utils/format";
+import {infoToString} from "lib/gra/utils/format";
 
 // filter
+import StartupConfiguration from "./configuration";
 import StartupPlugin from "./plugin";
 import StartupMap from "./map";
 
 // views
-import ViewComponent from "app/views/component";
+import ViewComponent from "lib/gra/views";
+
+// Library, execute CLI param translate.
+import "lib/gra/utils/variable";
 
 // Startup pipe
-export default class Startup extends Pipe {
-    constructor() {
+export default class Startup extends GRAPipe {
+    constructor(config) {
         super("Startup");
         // Setting which filter need to run.
         this.register(($progress = null, $resolve = null, $reject = null) => {
@@ -27,7 +31,7 @@ export default class Startup extends Pipe {
         }, "S1");
         this.register(new StartupPlugin(
             "S2",
-            "plugin/command",
+            "plugin/macro",
             this.application.controllers.command,
             "[STARTUP] S2, Command plugin loading."));
         this.register(new StartupPlugin(
@@ -45,6 +49,10 @@ export default class Startup extends Pipe {
             "db/map",
             this.application.models.data.map,
             "[STARTUP] S5, Map database loading."));
+        this.register(new StartupConfiguration(
+            "S6",
+            config,
+            "[STARTUP] S6, Configuration application."));
         this.onComplete = ($progress = null) => {
             console.log("[STARTUP] Complete, Game start.", ...infoToString($progress));
             // clear view
@@ -53,5 +61,6 @@ export default class Startup extends Pipe {
             let com = new ViewComponent();
             com.execute();
         }
+        this.execute({});
     }
 }

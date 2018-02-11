@@ -1,10 +1,10 @@
 // Library
-import Pipe from "lib/gra/command/pipe";
+import Macro from "lib/gra/controller/plugin/macro";
 
 // Command plugin
 import Look from "../action/look";
 
-export default class Goto extends Pipe {
+export default class Goto extends Macro {
     // Constructor
     constructor() {
         super("goto");
@@ -25,5 +25,8 @@ export default class Goto extends Pipe {
     // Accessor
     get help() {
         return "移動到目標地區，請使用 goto <目標>"
+    }
+    get link() {
+        return "common";
     }
 }

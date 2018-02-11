@@ -13,21 +13,10 @@ export default class ViewComponent extends BasicObject {
     //
     constructor($name) {
         super($name);
+        let status = this.application.models.data.config.status;
         this.info = {
-            status: {
-                command: {
-                    cmd: "goto",
-                    param: ["asia/taiwan"]
-                },
-                view: "input"
-            },
-            data: {
-                command: ["look", "exit"],
-                description: {
-                    short: "舞台",
-                    long: "這是一個虛擬空間"
-                }
-            }
+            status: status ? status : {},
+            data: {}
         };
     }
     //
@@ -35,11 +24,12 @@ export default class ViewComponent extends BasicObject {
         /*
         Execute flow
         1. execute command plugin
+        2. mount command
         2. when command complete, execute consolne-ui plugin
         3. when console-ui run over, setting next command information, and re-execute view.component.
         */
         let pipe = new Pipe();
-        pipe.register(this.command.bind(this), "S2");
+        pipe.register(this.command.bind(this), "S1");
         pipe.register(this.render.bind(this), "S3");
         pipe.onComplete = this.renderComplete.bind(this);
         pipe.execute(this.info);
@@ -52,8 +42,15 @@ export default class ViewComponent extends BasicObject {
                     $progress = info;
                     $resolve($progress);
                 });
-          $resolve($progress);
         }
+    }
+    // Mount
+    mount($progress = null, $resolve = null) {
+        // command mount have 3 type.
+        // 1. Common
+        // 2. Data link
+        // 3. Defined in map
+        $resolve($progress)
     }
     // Render
     render($progress = null, $resolve = null) {

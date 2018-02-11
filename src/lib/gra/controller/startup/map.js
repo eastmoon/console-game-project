@@ -1,5 +1,5 @@
 // project framework
-import Filter from "lib/mvc/progress/filter";
+import GRAFilter from "lib/gra/controller/common/filter";
 
 // Library
 import glob from "glob";
@@ -7,10 +7,10 @@ import Lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 
 // utils
-import {infoToString} from "app/utils/format";
+import {infoToString} from "lib/gra/utils/format";
 
 //
-export default class StartupMap extends Filter {
+export default class StartupMap extends GRAFilter {
     // Constructor
     constructor(name, path, container, log) {
         super(name);
@@ -40,8 +40,6 @@ export default class StartupMap extends Filter {
             // console.debug(db["asia/taiwan"].value());
             // console.debug(db["asia/taiwan"].get("command").value());
             // console.debug(db["asia/taiwan"].get("description").get("short").value());
-            //
-
             //
             $resolve($progress);
         });

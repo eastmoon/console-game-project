@@ -1,13 +1,13 @@
 // project framework
-import Filter from "lib/mvc/progress/filter";
+import GRAFilter from "lib/gra/controller/common/filter";
 
 // Library
 import glob from "glob";
 
 // utils
-import {infoToString} from "app/utils/format";
+import {infoToString} from "lib/gra/utils/format";
 
-export default class StartupPlugin extends Filter {
+export default class StartupPlugin extends GRAFilter {
     // Constructor
     constructor(name, path, container, log = "") {
         super(name);

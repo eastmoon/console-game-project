@@ -7,11 +7,6 @@ export function resolve(relativePath) {
     return path.resolve(process.cwd(), relativePath);
 }
 
-// 取回JSON檔案
-export function readJSON(relativePath) {
-    return JSON.parse(fs.readFileSync(resolve(relativePath)));
-}
-
 // 定義唯一值，確保矩陣中的值不會重覆
 Object.defineProperty(Array.prototype, 'unique', {
     value: function() {

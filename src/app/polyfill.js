@@ -15,17 +15,17 @@ import Chalk from "chalk";
 import {argv} from "yargs";
 console.error = (str) => {
     if (argv.error) {
-        console.log(`${Chalk.black.bgRed("[ERROR]")} ${Chalk.redBright(str)}`);
+        console.log(`${Chalk.black.bgRed("[ERROR]")} ${Chalk.redBright(typeof str === "object" ? JSON.stringify(str) : str)}`);
     }
 }
 console.warn = (str) => {
     if (argv.warn) {
-        console.log(`${Chalk.black.bgYellow("[WARN]")} ${Chalk.yellowBright(str)}`);
+        console.log(`${Chalk.black.bgYellow("[WARN]")} ${Chalk.yellowBright(typeof str === "object" ? JSON.stringify(str) : str)}`);
     }
 }
 console.debug = (str) => {
     if (argv.dev) {
-        console.log(`${Chalk.black.bgCyan("[DEBUG]")} ${Chalk.cyanBright(str)}`);
+        console.log(`${Chalk.black.bgCyan("[DEBUG]")} ${Chalk.cyanBright(typeof str === "object" ? JSON.stringify(str) : str)}`);
     }
 }
 console.error("Error information will showing.");

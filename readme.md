@@ -67,16 +67,16 @@ yarn start
 + --dev=<true/false>
 > 是否顯示開發資訊 (console.debug)，預設為 false；輸入 --dev ，視為 true
 
-### 開發環境
+### 語法檢查
 ```
 // 使用 npm 套件
-npm run dev
+npm run eslint
 // 使用 yarn 套件
-yarn dev
+yarn eslint
 ```
 > 執行 nodemon 來監視開發資料夾，並且經過 eslint 檢查專案語法正確性。
 
-### 測試環境
+### 單元測試
 ```
 // 使用 npm 套件
 npm test

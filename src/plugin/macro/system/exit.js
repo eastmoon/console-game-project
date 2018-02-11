@@ -1,6 +1,7 @@
-import Filter from "lib/gra/command/filter";
+//
+import Action from "lib/gra/controller/plugin/action";
 
-export default class Exit extends Filter {
+export default class Exit extends Action {
     // Constructor
     constructor() {
         super("exit")
@@ -17,5 +18,8 @@ export default class Exit extends Filter {
     // Accessor
     get help() {
         return "離開遊戲"
+    }
+    get link() {
+        return "common"
     }
 }

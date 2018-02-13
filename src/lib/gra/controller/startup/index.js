@@ -56,7 +56,7 @@ export default class Startup extends GRAPipe {
         this.onComplete = ($progress = null) => {
             console.log("[STARTUP] Complete, Game start.", ...infoToString($progress));
             // clear view
-            clear();
+            // clear();
             // start view component
             let com = new ViewComponent();
             com.execute();

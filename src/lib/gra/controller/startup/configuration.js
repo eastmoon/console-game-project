@@ -14,6 +14,7 @@ export default class StartupPlugin extends GRAFilter {
         this._config = config;
         this._log = log
     }
+
     // Execute method
     execute($progress = null, $resolve = null, $reject = null) {
         console.log(`${this._log}`, ...infoToString($progress, $resolve, $reject));
@@ -26,7 +27,34 @@ export default class StartupPlugin extends GRAFilter {
         this._config.plugin.common = defaultVariable(this._config.plugin.common, []);
         this._config.plugin.parser = defaultVariable(this._config.plugin.parser, {});
         this.application.models.data.config = this._config;
-        //
+        // Remove doesn't exist plugin command
+        this._config.plugin = this._filterPlugin(this._config.plugin);
+
+        // Configuration filter over.
         $resolve($progress);
+    }
+
+    // Filter plugin
+    _filterPlugin(plugin) {
+        if (typeof plugin === "object") {
+            if (plugin instanceof Array) {
+                // check the string in array that is an effect key with plugin command .
+                return plugin.filter((item) => {
+                    if (this.application.controllers.command.has(item)) {
+                        console.debug(`${item} exist.`);
+                    } else {
+                        console.debug(`${item} doesn't exist, remove it`);
+                        return false;
+                    }
+                    return true;
+                });
+            } else {
+                // if plugin is an object, it mean object content has multi array.
+                Object.keys(plugin).forEach((key) => {
+                    plugin[key] = this._filterPlugin(plugin[key]);
+                });
+            }
+        }
+        return plugin;
     }
 }

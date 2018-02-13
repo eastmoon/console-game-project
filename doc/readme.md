@@ -4,4 +4,6 @@
 
 ## § Directory
 
-+ [Configuration](./configuration/)
++ [Install](./wiki/install.md)
++ [CLI](./cli.md)
++ [Configuration](./wiki/configuration.md)

@@ -1,9 +1,5 @@
 # Console Game Project
 
-## § Document
-
-相關文件說明，參考[目錄](./doc/)
-
 ## § Library
 
 此專案包括一下函式庫：

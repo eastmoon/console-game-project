@@ -3,5 +3,8 @@
     "description": {
         "short": "日本",
         "long": "這是一個名為日本的虛擬空間，數個大型島嶼構成的島國座落於太平洋的西北方，最北可深入北極圈。"
+    },
+    "direction": {
+        "south": "asia/taiwan"
     }
 }

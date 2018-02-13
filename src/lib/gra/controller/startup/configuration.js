@@ -29,7 +29,6 @@ export default class StartupPlugin extends GRAFilter {
         this.application.models.data.config = this._config;
         // Remove doesn't exist plugin command
         this._config.plugin = this._filterPlugin(this._config.plugin);
-
         // Configuration filter over.
         $resolve($progress);
     }
@@ -53,6 +52,13 @@ export default class StartupPlugin extends GRAFilter {
                 Object.keys(plugin).forEach((key) => {
                     plugin[key] = this._filterPlugin(plugin[key]);
                 });
+            }
+        } else {
+            if (typeof plugin !== "string" || !this.application.controllers.command.has(plugin)) {
+                console.debug(`${plugin} doesn't exist, remove it`);
+                return [];
+            } else {
+                console.debug(`${plugin} exist.`);
             }
         }
         return plugin;

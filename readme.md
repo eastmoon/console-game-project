@@ -20,3 +20,4 @@
 * [Inquirer](https://www.npmjs.com/package/inquirer)
 * [Chalk](https://www.npmjs.com/package/chalk)
 * [Lowdb](https://www.npmjs.com/package/lowdb)
+* [i18n](https://www.npmjs.com/package/i18n)

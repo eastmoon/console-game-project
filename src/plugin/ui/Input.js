@@ -16,24 +16,31 @@ export default class Input extends UI {
             return input ? name.includes(input) : true;
         });
     }
-    deepCompare(object, keys) {
-        let key = keys.splice(0, 1);
-        let result = typeof object[key] !== "undefined";
-        if (result && keys.length > 0) {
-            return this.deepCompare(object[key], keys);
-        } else {
-            return result;
+    deepCompare(map, parser) {
+        /*
+        if parser is string or array, return it.
+        if parser isn't, and map is object, mean it have next object node, deep compare with it.
+        */
+        let list = [];
+        if (parser instanceof Array) {
+            return parser;
+        } else if (typeof parser === "string") {
+            return [parser];
+        } else if (map instanceof Object) {
+            Object.keys(map).forEach((key) => {
+                if (typeof parser[key] !== "undefined") {
+                    list = list.concat(this.deepCompare(map[key], parser[key]));
+                }
+            });
         }
+        return list;
     }
     // Execute method
     execute($progress, $resolve) {
         // Retrieve command which could use because map structure is exist.
-        let mappingCommand = [];
-        Object.keys(this.application.models.data.config.plugin.parser).forEach((key) => {
-            if (this.deepCompare($progress.data, key.split("."))) {
-                mappingCommand = mappingCommand.concat(this.application.models.data.config.plugin.parser[key]);
-            }
-        });
+        let mappingCommand = this.deepCompare(
+            $progress.data,
+            this.application.models.data.config.plugin.parser);
 
         // Defined question.
         const inputfilename = {
@@ -52,7 +59,8 @@ export default class Input extends UI {
                     command = command
                         .concat(special)
                         .concat(system)
-                        .concat(common);
+                        .concat(common)
+                        .sort();
                     //
                     // Show command help, if only have one command.
                     if (command.length === 1) {

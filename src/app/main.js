@@ -2,6 +2,8 @@
 import "./polyfill";
 // Library, startup application.
 import Startup from "lib/gra/controller/startup";
+//
+import i18n from "i18n";
 
 // 應用程式啟動配置
 module.exports = () => {
@@ -15,11 +17,20 @@ module.exports = () => {
             view: "input"
         },
         plugin: {
-            system: ["exit"],
-            common: ["goto", "source", "equip", "123", "456", "789"],
+            system: ["exit", "create", "describe"],
+            common: ["goto", "state", "equip", "say"],
             parser: {
-                description: ["look", "time"],
-                "description.long": ["llook"]
+                description: ["look"],
+                direction: {
+                    west: "west",
+                    east: "east",
+                    north: "north",
+                    south: "south",
+                    up: "up",
+                    down: "down",
+                },
+                items: ["drop", "take"],
+                npcs: ["kill"]
             }
         }
     };

@@ -17,7 +17,7 @@ module.exports = () => {
             view: "input"
         },
         plugin: {
-            system: ["exit", "create", "describe"],
+            system: ["look", "exit", "create", "describe"],
             common: ["goto", "state", "equip", "say"],
             parser: {
                 description: ["look"],

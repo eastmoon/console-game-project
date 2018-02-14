@@ -12,6 +12,7 @@ import {infoToString} from "lib/gra/utils/format";
 import StartupConfiguration from "./configuration";
 import StartupPlugin from "./plugin";
 import StartupMap from "./map";
+import StartupSave from "./save";
 
 // views
 import ViewComponent from "lib/gra/views";
@@ -53,6 +54,7 @@ export default class Startup extends GRAPipe {
             "S6",
             config,
             "[STARTUP] S6, Configuration application."));
+        this.register(new StartupSave("S7", "[STARTUP] S7, Game data loading"));
         this.onComplete = ($progress = null) => {
             console.log("[STARTUP] Complete, Game start.", ...infoToString($progress));
             // clear view

@@ -10,7 +10,7 @@ import FileSync from "lowdb/adapters/FileSync";
 import {infoToString} from "lib/gra/utils/format";
 
 //
-export default class StartupMap extends GRAFilter {
+export default class StartupSave extends GRAFilter {
     // Constructor
     constructor(name, path, container, log) {
         super(name);

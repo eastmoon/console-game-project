@@ -26,7 +26,4 @@ export default class Goto extends Macro {
     get help() {
         return "移動到目標地區，請使用 goto <目標>"
     }
-    get link() {
-        return "common";
-    }
 }

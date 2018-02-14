@@ -19,7 +19,4 @@ export default class Exit extends Action {
     get help() {
         return "離開遊戲"
     }
-    get link() {
-        return "common"
-    }
 }

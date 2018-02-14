@@ -16,7 +16,4 @@ export default class Look extends Action {
     get help() {
         return "觀看，若要觀看特定目標，請使用 look <目標>"
     }
-    get link() {
-        return "description";
-    }
 }

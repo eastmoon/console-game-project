@@ -1,0 +1,12 @@
+{
+    "command": [],
+    "ignore": ["exit"],
+    "description": {
+        "short": "長廊",
+        "long": "狹窄而高聳的白色長廊，兩側的牆面雕刻著不知名的豐饒場面。\n。"
+    },
+    "direction": {
+        "north": "temple/002",
+        "south": "temple/000"
+    }
+}

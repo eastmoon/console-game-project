@@ -1,0 +1,14 @@
+{
+    "command": [],
+    "ignore": ["exit"],
+    "description": {
+        "short": "庭院",
+        "long": "明亮的陽光正照耀此處，滿是不同顏色、品種的花卉正整齊的種植在這庭院。\n身後是白色的莊嚴殿堂，而花園中央有顆高聳的大樹。"
+    },
+    "direction": {
+        "north": "temple/004",
+        "south": "temple/002",
+        "east": "temple/003",
+        "west": "temple/003"
+    }
+}

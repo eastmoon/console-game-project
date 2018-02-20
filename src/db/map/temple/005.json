@@ -1,0 +1,11 @@
+{
+    "command": ["goto"],
+    "ignore": [],
+    "description": {
+        "short": "大樹殿堂",
+        "long": "一個由樹木構成的小殿堂，陽光從殿堂上方照耀入堂內，而地上正雕刻著一個魔法陣。\n"
+    },
+    "direction": {
+        "down": "temple/004"
+    }
+}

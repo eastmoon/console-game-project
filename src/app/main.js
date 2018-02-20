@@ -12,13 +12,13 @@ module.exports = () => {
         status: {
             command: {
                 cmd: "goto",
-                param: ["asia/taiwan"]
+                param: ["temple/000"]
             },
             view: "input"
         },
         plugin: {
             system: ["look", "exit", "create", "describe"],
-            common: ["goto", "state", "equip", "say"],
+            common: ["state", "equip", "say"],
             parser: {
                 description: ["look"],
                 direction: {

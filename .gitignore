@@ -1,4 +1,5 @@
 # project configurations
+src/db/save/
 
 # third-party library
 node_modules/

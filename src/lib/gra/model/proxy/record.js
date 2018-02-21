@@ -22,6 +22,7 @@ export default class RecordProxy {
         this._name = $name;
         this._container = $container;
         this._file = null;
+        this._data = null;
         this._original = null;
         this._lock = false;
     }
@@ -29,38 +30,42 @@ export default class RecordProxy {
     load($path, $callback) {
         glob($path, {}, (err, matches) => {
             if (!err && matches.length >= 0 && matches[0] === $path) {
+                // load json file, using lowdb and fileSync object.
                 const adapter = new FileSync($path, {
                     serialize: this._encrypt.bind(this),
                     deserialize: this._decrypt.bind(this)
                 });
                 this._file = Lowdb(adapter);
-                const save = {
-                    x: 1,
-                    y: 2,
-                    z: 8
-                };
-                this.save(save);
-                if (this._container !== null && typeof this._container.register === "function") {
-                    this._container.register(this._name, this._file.value());
+                // initial data
+                if (this._file.has("data").value()) {
+                    this._data = this._file.get("data").value();
                 }
-                $callback();
+                // register proxy into framework
+                if (this._container !== null && typeof this._container.register === "function") {
+                    this._container.register(this._name, this);
+                }
+                // execute callback function.
+                if (typeof $callback === "function") {
+                    $callback();
+                }
             }
-
-
-
         });
     }
-
     save($save = null) {
+        // if function argument isn't null, saving this information.
+        // if function argument is null, saving the object data.
         if (!emptyVariable($save)) {
             this._file
               .set("data", $save)
               .write();
+        } else {
+            this._file
+              .set("data", this.data)
+              .write();
         }
     }
-
     _encrypt(object) {
-        //
+        // encrypt algorithm
         if (this._lock) {
             console.debug("Record Proxy lock, file will not change.");
             return this._original;
@@ -77,9 +82,8 @@ export default class RecordProxy {
             }
         }
     }
-
     _decrypt(content) {
-        //
+        // decrypt algorithm
         this._original = content;
         this._lock = false;
         //
@@ -105,5 +109,11 @@ export default class RecordProxy {
             console.error(`Record Proxy error, record file structure is wrong.`);
         }
         return object;
+    }
+    // Accessor
+    get data() {
+        if (this._data === null || typeof this._data !== "object")
+            return {};
+        return this._data;
     }
 }

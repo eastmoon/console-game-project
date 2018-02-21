@@ -56,6 +56,11 @@ export default class StartupRecord extends GRAFilter {
         console.debug("[STARTUP] Record S2, loading save file.");
         let proxy = new RecordProxy("GameRecord", this.application.models.proxy);
         proxy.load(this._file, () => {
+            // if record is initial state, write initial state in file.
+            if (Object.keys(proxy.data).length === 0)  {
+                console.debug("[STARTUP] Record S2, Record is initial state, saving empty data.")
+                proxy.save({url: "local"});
+            }
             $resolve($progress);
         });
     }
@@ -73,18 +78,5 @@ export default class StartupRecord extends GRAFilter {
             $resolve($progress);
         };
         pipe.execute($progress);
-
-
-        /*
-            if (matches.length === 0) {
-                // 1. 若資料檔不存在
-                defaultRecord.data = AES.encrypt(JSON.stringify(defaultRecord.data), defaultRecord.key).toString();
-                console.debug(defaultRecord);
-            } else {
-                // 2. 若檔案存在，開起當按並將內容儲存於框架
-                console.debug(matches);
-            }
-        });
-        */
     }
 }

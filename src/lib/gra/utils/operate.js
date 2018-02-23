@@ -1,7 +1,26 @@
 // Library
 // Create save file and folder.
 import fs from "fs";
-import path from "path";
+
+function mkdirrecur(list, cur, callback) {
+    if (list.length >= cur) {
+        let path = list.slice(0, cur).toString().replace(/[,]/g, "/");
+        // 1. checking folder is exist or not.
+        if (fs.existsSync(path)) {
+            // 1.1 exist folder, go to next sub folder.
+            // console.log("pass ", folderDir);
+            mkdirrecur(list, cur + 1, callback);
+        } else {
+            // 1.2 not exist, create folder.
+            fs.mkdir(path, 777, () => {
+                mkdirrecur(list, cur + 1, callback);
+            });
+        }
+    } else {
+        // 2. folder create complete, execute callback
+        callback();
+    }
+}
 
 export function mkdir(path) {
     return new Promise((resolve) => {
@@ -16,25 +35,4 @@ export function mkdir(path) {
             resolve(path);
         });
     });
-}
-
-function mkdirrecur(list, cur, callback) {
-    if (list.length >= cur) {
-        let path = list.slice(0, cur).toString().replace(/[,]/g, "/");
-        // 1. checking folder is exist or not.
-        if (fs.existsSync(path)) {
-            // 1.1 exist folder, go to next sub folder.
-            // console.log("pass ", folderDir);
-            mkdirrecur(list, cur + 1, callback);
-        } else {
-            // 1.2 not exist, create folder.
-            fs.mkdir(path, 777, (res) => {
-                // console.log(res);
-                mkdirrecur(list, cur + 1, callback);
-            });
-        }
-    } else {
-        // 2. folder create complete, execute callback
-        callback();
-    }
 }

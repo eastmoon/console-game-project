@@ -3,7 +3,7 @@ import "./polyfill";
 // Library, startup application.
 import Startup from "lib/gra/controller/startup";
 //
-import i18n from "i18n";
+// import i18n from "i18n";
 
 // 應用程式啟動配置
 module.exports = () => {

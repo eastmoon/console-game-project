@@ -65,13 +65,13 @@ export default class Input extends UI {
                         .concat(common)
                         // Remove duplicate Command
                         .filter((item, index, array) => {
-                            let log = `Duplicate command : ${item}, ${index}, ${array.includes(item, index + 1)}`;
+                            // let log = `Duplicate command : ${item}, ${index}, ${array.includes(item, index + 1)}`;
                             // console.debug(log);
                             return !array.includes(item, index + 1);
                         })
                         // Remove ignore Command
                         .filter((item) => {
-                            let log = `Ignore : ${item}, ${ignoreCommand.includes(item)}`;
+                            // let log = `Ignore : ${item}, ${ignoreCommand.includes(item)}`;
                             // console.debug(log);
                             return !ignoreCommand.includes(item);
                         })

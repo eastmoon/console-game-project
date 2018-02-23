@@ -8,7 +8,6 @@ import glob from "glob";
 import Moment from "moment";
 import SHA256 from "crypto-js/sha256";
 import fs from "fs";
-import path from "path";
 
 // utils
 import {infoToString} from "lib/gra/utils/format";
@@ -23,6 +22,10 @@ export default class StartupRecord extends GRAFilter {
         this._file = "src/db/save/save.json";
     }
     // Method
+    showInfo($progress = null, $resolve = null, $reject = null) {
+        console.log(`${this._log}`, ...infoToString($progress, $resolve, $reject));
+        $resolve($progress);
+    }
     checkfile($progress = null, $resolve = null, $reject = null) {
         console.debug("[STARTUP] Record S1, check record file exist, if not exist create folder and file.");
         glob(this._file, {}, (err, matches) => {
@@ -32,7 +35,7 @@ export default class StartupRecord extends GRAFilter {
             }
             if (matches.length === 0) {
                 // 1.1 若檔案不存在，建立目錄與檔案
-                mkdir(`${this._file}`).then((response) => {
+                mkdir(`${this._file}`).then(() => {
                     // 1.3 建立新檔案並產生金鑰與初始文件內容
                     // 1.3.1 產生密鑰
                     const time = Moment().format("x");
@@ -41,8 +44,8 @@ export default class StartupRecord extends GRAFilter {
                         key: secKey,
                         data: ""
                     };
-                    fs.writeFile(`${this._file}`, JSON.stringify(defaultData), (err) => {
-                        err ? console.error(err) : console.debug("Default record file complete.");
+                    fs.writeFile(`${this._file}`, JSON.stringify(defaultData), (writeErr) => {
+                        writeErr ? console.error(writeErr) : console.debug("Default record file complete.");
                         $resolve($progress);
                     });
                 });
@@ -52,7 +55,7 @@ export default class StartupRecord extends GRAFilter {
             }
         });
     }
-    initialfile($progress = null, $resolve = null, $reject = null) {
+    initialfile($progress = null, $resolve = null) {
         console.debug("[STARTUP] Record S2, loading save file.");
         let proxy = new RecordProxy("GameRecord", this.application.models.proxy);
         proxy.load(this._file, () => {
@@ -65,16 +68,12 @@ export default class StartupRecord extends GRAFilter {
         });
     }
     // Execute method
-    execute($progress = null, $resolve = null, $reject = null) {
-
+    execute($progress = null, $resolve = null) {
         let pipe = new GRAPipe();
-        pipe.register(($progress = null, $resolve = null, $reject = null) => {
-            console.log(`${this._log}`, ...infoToString($progress, $resolve, $reject));
-            $resolve($progress);
-        }, "S1");
+        pipe.register(this.showInfo.bind(this), "S1");
         pipe.register(this.checkfile.bind(this), "S2");
         pipe.register(this.initialfile.bind(this), "S3");
-        pipe.onComplete = ($progress = null) => {
+        pipe.onComplete = () => {
             $resolve($progress);
         };
         pipe.execute($progress);

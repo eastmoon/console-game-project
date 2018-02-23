@@ -2,7 +2,7 @@
 import GRAPipe from "lib/gra/controller/common/pipe";
 
 // Library
-import clear from "clear";
+// import clear from "clear";
 import inquirer from "inquirer";
 
 // utils
